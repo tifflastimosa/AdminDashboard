@@ -6,6 +6,11 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
+import clientRoutes  from "./routes/client.js";
+import generalRoutes  from "./routes/general.js";
+import managementRoutes  from "./routes/management.js";
+import salesRoutes  from "./routes/sales.js";
+
 /* CONFIGURATION */
 
 // set up environmental variables
@@ -24,3 +29,10 @@ app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false  }));
 app.use(cors());
+
+/* ROUTES */
+// routes represent the different sections of the web app - this  how we split up the apis
+app.use("/client", clientRoutes); // products, customers, transactions
+app.use("/general", generalRoutes); // user and the dashboard
+app.use("/management", managementRoutes);  // management
+app.use("/sales", salesRoutes);  // overview, daily, monthly, breakdown
