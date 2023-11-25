@@ -36,3 +36,12 @@ app.use("/client", clientRoutes); // products, customers, transactions
 app.use("/general", generalRoutes); // user and the dashboard
 app.use("/management", managementRoutes);  // management
 app.use("/sales", salesRoutes);  // overview, daily, monthly, breakdown
+
+/* MONGOOSE SETUP */
+const PORT = process.env.PORT || 9000; // allows us to access .env variables
+mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`))
+}).catch((error) => console.log(`${error} did not connect`));
